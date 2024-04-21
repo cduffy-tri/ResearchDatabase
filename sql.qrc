@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>sql/createFilesTable.sql</file>
+        <file>sql/createResearchTable.sql</file>
+        <file>sql/createKeywordDefinitionsTable.sql</file>
+        <file>sql/createKeywordsTable.sql</file>
+        <file>sql/insertIntoResearchTable.sql</file>
+        <file>sql/insertKeywordDef.sql</file>
+        <file>sql/insertIntoKeywordsTable.sql</file>
+    </qresource>
+</RCC>
