@@ -63,7 +63,7 @@ QVariant ResearchDB::getKeywordDefId(const QString& keyword)
     return keyword_def_id;
 }
 
-bool ResearchDB::inesrtResearchItem(const ResearchItem& item)
+bool ResearchDB::insertResearchItem(const ResearchItem& item)
 {
     // make a query to the datbase and load it with the data.
     QString errorStr = item.isValid();
