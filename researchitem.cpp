@@ -22,6 +22,16 @@ ResearchItem::ResearchItem(const unsigned int& id,
     this->url = url;
 }
 
+const QStringList ResearchItem::getKeywords() const
+{
+    return keywords;
+}
+
+void ResearchItem::insertKeyword(const QString& keyword)
+{
+    keywords.append(keyword.toLower());
+}
+
 QString ResearchItem::isValid() const
 {
     // check if the title is empty

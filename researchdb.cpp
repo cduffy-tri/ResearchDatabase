@@ -5,6 +5,7 @@
 #include <QSqlRecord>
 #include <QSqlField>
 #include "filetools.h"
+
 ResearchDB::ResearchDB(QWidget *parent)
     : QWidget{parent}
 {
@@ -39,6 +40,29 @@ QSqlDatabase ResearchDB::getDB()
     return db;
 }
 
+QVariant ResearchDB::getKeywordDefId(const QString& keyword)
+{
+    // query for the id of the keyword_def_id
+    QString qText = QString("SELECT keyword_def_id FROM keyword_def WHERE keyword_def_str='%1'").arg(keyword)+";";
+    //qDebug() << qText;
+    qDebug() << qText;
+    QSqlQuery queryForKeywordID;
+    queryForKeywordID.prepare(qText);
+    queryForKeywordID.exec();
+    QSqlError error = queryForKeywordID.lastError();
+    if(error.isValid())
+    {
+        qDebug() << error.text();
+    }
+
+    QVariant keyword_def_id;
+    while (queryForKeywordID.next())
+    {
+        keyword_def_id = queryForKeywordID.record().field(0).value();
+    }
+    return keyword_def_id;
+}
+
 bool ResearchDB::inesrtResearchItem(const ResearchItem& item)
 {
     // make a query to the datbase and load it with the data.
@@ -46,7 +70,6 @@ bool ResearchDB::inesrtResearchItem(const ResearchItem& item)
 
     if(errorStr.isEmpty())
     {
-        // process the item into the research table
         QSqlQuery researchTableQuery;
         researchTableQuery.prepare(FileTools::readFile(":/sql/insertIntoResearchTable.sql"));
         researchTableQuery.bindValue(":title", item.title);
@@ -57,28 +80,47 @@ bool ResearchDB::inesrtResearchItem(const ResearchItem& item)
         researchTableQuery.bindValue(":url", item.url);
         researchTableQuery.exec();
 
-        QVariant researchId = researchTableQuery.record().field(0).value();
-        qDebug() << researchId;
+        QVariant researchId = researchTableQuery.lastInsertId();
+        //qDebug() << researchId;
 
         // if there is any keywords then process them into the database
-        if(!item.keywords.empty())
+        if(!item.getKeywords().empty())
         {
-            for(const QString& keyword : item.keywords)
+            for(const QString& keyword : item.getKeywords())
             {
                 // insert keyword def if not already created
                 QSqlQuery keywordDefQuery;
                 keywordDefQuery.prepare(FileTools::readFile(":/sql/insertKeywordDef.sql"));
-                keywordDefQuery.bindValue(":keyword_def", keyword.toLower());
+                keywordDefQuery.bindValue(":keyword_def_str", keyword.toLower());
                 keywordDefQuery.exec();
+                QVariant keywordDefId = keywordDefQuery.lastInsertId();
+                //qDebug() << keywordDefId;
 
-                QVariant keywordDefId = keywordDefQuery.record().field(0).value();
+                if(keywordDefId.isValid())
+                {
+                    // insert the keyword under the keywords table with the research ID.
+                    QSqlQuery keywordsQuery;
+                    keywordsQuery.prepare(FileTools::readFile(":/sql/insertIntoKeywordsTable.sql"));
+                    keywordsQuery.bindValue(":keyword_def_id", keywordDefId);
+                    keywordsQuery.bindValue(":research_id", researchId);
+                    keywordsQuery.exec();
+                }
+                else
+                {
+                    //qDebug() << keyword_def_id;
+                    QVariant keyword_def_id = getKeywordDefId(keyword);
+                    qDebug() << keyword_def_id;
 
-                // insert the keyword under the keywords table with the research ID.
-                QSqlQuery keywordsQuery;
-                keywordsQuery.prepare(FileTools::readFile(":/sql/insertIntoKeywordsTable.sql"));
-                keywordsQuery.bindValue(":keyword_def_id", keywordDefId);
-                keywordsQuery.bindValue(":research_id", researchId);
-                keywordsQuery.exec();
+                    if(keyword_def_id.isValid())
+                    {
+                        // insert the keyword under the keywords table with the current research ID
+                        QSqlQuery keywordsQuery;
+                        keywordsQuery.prepare(FileTools::readFile(":/sql/insertIntoKeywordsTable.sql"));
+                        keywordsQuery.bindValue(":keyword_def_id", keyword_def_id);
+                        keywordsQuery.bindValue(":research_id", researchId);
+                        keywordsQuery.exec();
+                    }
+                }
             }
         }
     }

@@ -13,7 +13,6 @@ public:
     QString author = "";
     QDate publicationDate;
     QString abstraction = "";
-    QStringList keywords;
     QString doi = "";
     QString url = "";
 
@@ -29,6 +28,13 @@ public:
                  const QString& url = "");
 
     QString isValid() const;
+
+    void insertKeyword(const QString& keyword);
+
+    const QStringList getKeywords() const;
+
+private:
+    QStringList keywords;
 };
 
 #endif // RESEARCHITEM_H

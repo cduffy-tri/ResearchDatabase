@@ -13,12 +13,11 @@ MainWindow::MainWindow(QWidget *parent)
     researchDB = new ResearchDB(this);
 
     ResearchItem item;
-    item.title = "Test";
-    item.keywords.append("Aliens");
-    item.keywords.append("Space");
+    item.title = "Test2";
+    item.insertKeyword("Testing Keywords");
+    item.insertKeyword("Aliens");
 
-
-    researchDB->inesrtResearchItem(item);
+    researchDB->insertResearchItem(item);
 }
 
 MainWindow::~MainWindow()

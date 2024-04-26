@@ -13,10 +13,12 @@ public:
 
     QSqlDatabase getDB();
 
+    QVariant getKeywordDefId(const QString& keyword);
+
 signals:
 
 public slots:
-    bool inesrtResearchItem(const ResearchItem& item);
+    bool insertResearchItem(const ResearchItem& item);
 
 private:
     QSqlDatabase db;
