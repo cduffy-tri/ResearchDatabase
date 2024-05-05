@@ -18,6 +18,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+
+    void search();
+
+    void searchByTitle();
+
 private:
     Ui::MainWindow *ui;
     ResearchDB* researchDB = nullptr;

@@ -7,5 +7,6 @@
         <file>sql/insertIntoResearchTable.sql</file>
         <file>sql/insertKeywordDef.sql</file>
         <file>sql/insertIntoKeywordsTable.sql</file>
+        <file>sql/search/searchByTitle.sql</file>
     </qresource>
 </RCC>

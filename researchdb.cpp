@@ -22,6 +22,7 @@ ResearchDB::ResearchDB(QWidget *parent)
         qDebug() << "Connnected to database";
     }
 
+
     // create the research table
     QSqlQuery(FileTools::readFile(":/sql/createResearchTable.sql"));
 
@@ -33,6 +34,9 @@ ResearchDB::ResearchDB(QWidget *parent)
 
     // create keywords table
     QSqlQuery(FileTools::readFile(":/sql/createKeywordsTable.sql"));
+
+
+    queryModel = new QSqlQueryModel(this);
 }
 
 QSqlDatabase ResearchDB::getDB()
@@ -130,4 +134,16 @@ bool ResearchDB::insertResearchItem(const ResearchItem& item)
     }
 
     return (!errorStr.isEmpty());
+}
+
+QSqlQueryModel* ResearchDB::getQueryModel()
+{
+    return queryModel;
+}
+
+void ResearchDB::searchByTitle(const QString& title)
+{
+    // set the query to the database using the qSqlQueryModel
+    QString queryText = QString(FileTools::readFile(":/sql/search/searchByTitle.sql"));
+    queryModel->setQuery(queryText.arg(title));
 }
