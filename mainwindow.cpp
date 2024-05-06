@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "researchitem.h"
+#include "InsertResearchSourceForm.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,6 +19,11 @@ MainWindow::MainWindow(QWidget *parent)
     this->setFont(font);
 
     researchDB = new ResearchDB(this);
+
+    InsertResearchSourceForm* insertResearchSourceForm = new InsertResearchSourceForm(this);
+    this->setCentralWidget(insertResearchSourceForm);
+
+    this->showMaximized();
 
     /*
     // test the insert of research button
