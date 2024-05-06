@@ -11,6 +11,11 @@ MainWindow::MainWindow(QWidget *parent)
     this->setWindowTitle("Research Database");
 
     this->ui->searchByComboBox->insertItem(0, "Title");
+    this->ui->searchByComboBox->insertItem(1, "Keyword");
+
+    QFont font = this->font();
+    font.setPointSize(15);
+    this->setFont(font);
 
     researchDB = new ResearchDB(this);
 
@@ -40,6 +45,10 @@ void MainWindow::search()
     {
         searchByTitle();
     }
+    else if(this->ui->searchByComboBox->currentText() == "Keyword")
+    {
+        searchByKeyword();
+    }
 }
 
 void MainWindow::searchByTitle()
@@ -50,6 +59,13 @@ void MainWindow::searchByTitle()
     // make a query for the title
     this->researchDB->searchByTitle(title);
 
+    this->ui->listView->setModel(this->researchDB->getQueryModel());
+}
+
+void MainWindow::searchByKeyword()
+{
+    QString keyword = this->ui->searchLineEdit->text();
+    this->researchDB->searchByKeyword(keyword);
     this->ui->listView->setModel(this->researchDB->getQueryModel());
 }
 

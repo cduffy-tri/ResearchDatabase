@@ -22,6 +22,8 @@ public:
 
 
     void searchByTitle(const QString& title);
+
+    void searchByKeyword(const QString& keyword);
 signals:
 
 public slots:

@@ -24,6 +24,8 @@ public slots:
 
     void searchByTitle();
 
+    void searchByKeyword();
+
 private:
     Ui::MainWindow *ui;
     ResearchDB* researchDB = nullptr;

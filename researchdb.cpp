@@ -147,3 +147,10 @@ void ResearchDB::searchByTitle(const QString& title)
     QString queryText = QString(FileTools::readFile(":/sql/search/searchByTitle.sql"));
     queryModel->setQuery(queryText.arg(title));
 }
+
+void ResearchDB::searchByKeyword(const QString& keyword)
+{
+    // use the keyword to make a sqlquery on the query model
+    QString queryText = QString(FileTools::readFile(":/sql/search/searchByKeyword.sql")).arg(keyword);
+    this->queryModel->setQuery(queryText);
+}
