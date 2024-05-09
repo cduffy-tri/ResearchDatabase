@@ -2,7 +2,7 @@
 #include "ui_mainwindow.h"
 #include "researchitem.h"
 #include "InsertResearchSourceForm.h"
-
+#include "ResearchID.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -43,6 +43,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect signals to slots
     connect(this->ui->searchButton, &QPushButton::clicked, this, &MainWindow::search);
+
+    qDebug() << ResearchID(1).getKeywords();
 }
 
 void MainWindow::search()
