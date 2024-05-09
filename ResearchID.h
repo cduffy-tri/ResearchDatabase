@@ -19,6 +19,8 @@ public:
     // set title
     void setTitle(const QString& title);
 
+    void setAuthor(const QString& author);
+
     // get the title of the research reecord
     QString getTitle() const;
 

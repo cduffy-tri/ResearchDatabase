@@ -64,6 +64,16 @@ void ResearchID::setTitle(const QString& title)
     query.exec();
 }
 
+void ResearchID::setAuthor(const QString& author)
+{
+    QString queryString = "UPDATE research SET author = :author WHERE research_id = :research_id;";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":author", author);
+    query.bindValue(":research_id", id);
+    query.exec();
+}
+
 // get the title of the research reecord
 QString ResearchID::getTitle() const
 {
