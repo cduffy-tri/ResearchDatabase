@@ -27,7 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect signals to slots
     connect(this->ui->searchButton, &QPushButton::clicked, this, &MainWindow::search);
-    //ResearchID(1)
+    //ResearchID(1).insertKeyword("Yeet");
 }
 
 void MainWindow::search()

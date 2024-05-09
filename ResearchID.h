@@ -1,6 +1,7 @@
 #ifndef RESEARCHID_H
 #define RESEARCHID_H
 #include <QString>
+#include <QDate>
 class ResearchID
 {
     unsigned int id;
@@ -21,11 +22,23 @@ public:
 
     void setAuthor(const QString& author);
 
+    void setPublicationDate(const QDate& publication_date);
+
+    void setAbstraction(const QString& abstraction);
+
+    void setDOI(const QString& doi);
+
+    void setURL(const QString& url);
+
+    /*void insertKeyword(const QString keyword);*/
+
     // get the title of the research reecord
     QString getTitle() const;
 
     // get the author of the research record
     QString getAuthor() const;
+
+    QDate getPublicationDate() const;
 
     // get the summary/abstraction from the research id
     QString getAbstraction() const;

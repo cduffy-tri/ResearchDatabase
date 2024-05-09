@@ -1,6 +1,7 @@
 #include "ResearchID.h"
 #include <QSqlQuery>
 #include <QSqlRecord>
+#include <QVariant>
 
 ResearchID::ResearchID()
 {
@@ -74,6 +75,87 @@ void ResearchID::setAuthor(const QString& author)
     query.exec();
 }
 
+void ResearchID::setPublicationDate(const QDate& publication_date)
+{
+    QString queryString = "UPDATE research SET publication_date = :publication_date WHERE research_id = :research_id;";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":publication_date", publication_date);
+    query.bindValue(":research_id", id);
+    query.exec();
+}
+
+void ResearchID::setAbstraction(const QString& abstraction)
+{
+    QString queryString = "UPDATE research SET abstraction = :abstraction WHERE research_id = :research_id;";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":abstraction", abstraction);
+    query.bindValue(":research_id", id);
+    query.exec();
+}
+
+void ResearchID::setDOI(const QString& doi)
+{
+    QString queryString = "UPDATE research SET doi = :doi WHERE research_id = :research_id;";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":doi", doi);
+    query.bindValue(":research_id", id);
+    query.exec();
+}
+
+void ResearchID::setURL(const QString& url)
+{
+    QString queryString = "UPDATE research SET url = :url WHERE research_id = :research_id;";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":url", url);
+    query.bindValue(":research_id", id);
+    query.exec();
+}
+
+/*void ResearchID::insertKeyword(const QString keyword)
+{
+    // generate the keyword_def record if not already created
+    QString keywordStr = keyword.toLower(); // prevent upper case from being stored
+    QString queryString = "INSERT INTO keyword_def (keyword_def_str) VALUES(:keyword)";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":keyword", keywordStr);
+    query.exec();
+
+    QVariant lastKeywordID = query.lastInsertId();
+    if(lastKeywordID.isValid())
+    {
+        // insert the new keyword_def_id into the keywords table with the research_id
+        QSqlQuery query;
+        query.prepare("INSERT INTO keywords (keyword_def_id, research_id) VALUES(:keyword_def_id, :research_id);");
+        query.bindValue(":keyword_def_id", lastKeywordID);
+        query.bindValue(":research_id", id);
+        query.exec();
+    }
+    else
+    {
+        // create the new keyword_def record
+        QSqlQuery query;
+        query.prepare("INSERT INTO keyword_def (keyword_def_str) :keyword_def_str;");
+        query.bindValue(":keyword_def_str", keywordStr);
+        query.exec();
+
+        QVariant lastKeywordID = query.lastInsertId();
+        // insert the keyword into the keywords table
+        if(lastKeywordID.isValid())
+        {
+            QSqlQuery keywordsQuery;
+            keywordsQuery.prepare("INSERT INTO keywords (keyword_def_id, research_id) VALUES(:keyword_def_id, :research_id);");
+            keywordsQuery.bindValue(":keyword_def_id", lastKeywordID);
+            keywordsQuery.bindValue(":research_id", id);
+            keywordsQuery.exec();
+        }
+    }
+}*/
+
 // get the title of the research reecord
 QString ResearchID::getTitle() const
 {
@@ -104,6 +186,21 @@ QString ResearchID::getAuthor() const
         author = query.record().value(0).toString();
     }
     return author;
+}
+
+QDate ResearchID::getPublicationDate() const
+{
+    QString queryString = "SELECT publication_date FROM research WHERE research_id = :research_id;";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":research_id", id);
+    query.exec();
+    QDate publicationDate;
+    while(query.next())
+    {
+        publicationDate = query.record().value(0).toDate();
+    }
+    return publicationDate;
 }
 
 // get doi
