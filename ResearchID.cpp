@@ -53,6 +53,17 @@ bool ResearchID::isValid() const
     return isValid;
 }
 
+// set title
+void ResearchID::setTitle(const QString& title)
+{
+    QString queryString = "UPDATE research SET title = :title WHERE research_id = :research_id;";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":title", title);
+    query.bindValue(":research_id", id);
+    query.exec();
+}
+
 // get the title of the research reecord
 QString ResearchID::getTitle() const
 {

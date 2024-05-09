@@ -25,26 +25,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     this->showMaximized();
 
-    /*
-    // test the insert of research button
-    ResearchItem item;
-    item.title = "Test2";
-    item.insertKeyword("Testing Keywords");
-    item.insertKeyword("Aliens");
-
-    researchDB->insertResearchItem(item);
-    */
-
-    // test the model display
-
-    //this->researchDB->searchByTitle("Test");
-
-    //this->ui->listView->setModel(this->researchDB->getQueryModel());
-
     // connect signals to slots
     connect(this->ui->searchButton, &QPushButton::clicked, this, &MainWindow::search);
 
-    qDebug() << ResearchID(1).getKeywords();
 }
 
 void MainWindow::search()

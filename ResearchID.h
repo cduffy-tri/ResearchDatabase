@@ -16,6 +16,9 @@ public:
     // get if the id is a valid database record
     bool isValid() const;
 
+    // set title
+    void setTitle(const QString& title);
+
     // get the title of the research reecord
     QString getTitle() const;
 
