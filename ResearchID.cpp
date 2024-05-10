@@ -208,6 +208,21 @@ void ResearchID::insertKeyword(const QString keyword)
     }
 }
 
+void ResearchID::attachFile(const QString& fileName, const QByteArray& data)
+{
+    // check if the id is valid
+    if(!this->isValid())
+        return;
+
+    // generate the new file record and tie it back to the research_id
+    QSqlQuery generateFileQuery;
+    generateFileQuery.prepare("INSERT INTO files (research_id, file_name, file_data) VALUES(:research_id, :file_name, :file_data);");
+    generateFileQuery.bindValue(":research_id", id);
+    generateFileQuery.bindValue(":file_name", fileName);
+    generateFileQuery.bindValue(":file_data", data);
+    generateFileQuery.exec();
+}
+
 // get the title of the research reecord
 QString ResearchID::getTitle() const
 {

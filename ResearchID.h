@@ -32,6 +32,8 @@ public:
 
     void insertKeyword(const QString keyword);
 
+    void attachFile(const QString& fileName, const QByteArray& data);
+
     // get the title of the research reecord
     QString getTitle() const;
 
