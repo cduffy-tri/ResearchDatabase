@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "researchdb.h"
+#include "ResearchAPI/ResearchDB.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {

@@ -11,20 +11,20 @@ CONFIG += c++17
 SOURCES += \
     InsertResearchSourceForm.cpp \
     ResearchAPI/FileID.cpp \
+    ResearchAPI/ResearchDB.cpp \
     ResearchAPI/ResearchID.cpp \
     filetools.cpp \
     main.cpp \
     mainwindow.cpp \
-    researchdb.cpp \
     researchitem.cpp
 
 HEADERS += \
     InsertResearchSourceForm.h \
     ResearchAPI/FileID.h \
+    ResearchAPI/ResearchDB.h \
     ResearchAPI/ResearchID.h \
     filetools.h \
     mainwindow.h \
-    researchdb.h \
     researchitem.h
 
 FORMS += \

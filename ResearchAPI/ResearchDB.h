@@ -3,7 +3,6 @@
 
 #include <QWidget>
 #include <QSqlDatabase>
-#include "researchitem.h"
 #include <QSqlQueryModel>
 
 class ResearchDB : public QWidget
@@ -16,18 +15,12 @@ public:
 
     QVariant getKeywordDefId(const QString& keyword);
 
-
     QSqlQueryModel* getQueryModel();
-
-
 
     void searchByTitle(const QString& title);
 
     void searchByKeyword(const QString& keyword);
 signals:
-
-public slots:
-    bool insertResearchItem(const ResearchItem& item);
 
 private:
     QSqlDatabase db;
