@@ -1,9 +1,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "researchitem.h"
 #include "InsertResearchSourceForm.h"
-#include "ResearchID.h"
-#include "filetools.h"
+#include "ResearchAPI/FileID.h"
+#include "ResearchAPI/ResearchID.h"
+
+//#include "filetools.h"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -28,6 +29,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect signals to slots
     connect(this->ui->searchButton, &QPushButton::clicked, this, &MainWindow::search);
+    //ResearchID::generateNewSource("Aliens");
+    QList<FileID> fileList = ResearchID(1).getFiles();
+    for(const FileID& fileId : fileList)
+    {
+        qDebug () << fileId.getName();
+    }
 }
 
 void MainWindow::search()

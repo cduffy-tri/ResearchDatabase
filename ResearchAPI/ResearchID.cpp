@@ -208,11 +208,11 @@ void ResearchID::insertKeyword(const QString keyword)
     }
 }
 
-void ResearchID::attachFile(const QString& fileName, const QByteArray& data)
+bool ResearchID::attachFile(const QString& fileName, const QByteArray& data)
 {
     // check if the id is valid
     if(!this->isValid())
-        return;
+        return false;
 
     // generate the new file record and tie it back to the research_id
     QSqlQuery generateFileQuery;
@@ -221,6 +221,7 @@ void ResearchID::attachFile(const QString& fileName, const QByteArray& data)
     generateFileQuery.bindValue(":file_name", fileName);
     generateFileQuery.bindValue(":file_data", data);
     generateFileQuery.exec();
+    return true;
 }
 
 // get the title of the research reecord
@@ -318,6 +319,21 @@ QStringList ResearchID::getKeywords() const
     return keywords;
 }
 
+QList<FileID> ResearchID::getFiles() const
+{
+    // find all of the files that are acociated with this research source
+    QSqlQuery fileQuery;
+    fileQuery.prepare("SELECT file_id FROM files WHERE research_id = :research_id;");
+    fileQuery.bindValue(":research_id", id);
+    fileQuery.exec();
+    QList<FileID> fileList;
+    while(fileQuery.next())
+    {
+        fileList.append(FileID(fileQuery.record().value(0).toUInt()));
+    }
+    return fileList;
+}
+
 // get the summary/abstraction from the research id
 QString ResearchID::getAbstraction() const
 {
@@ -332,37 +348,4 @@ QString ResearchID::getAbstraction() const
         abstraction = query.record().value(0).toString();
     }
     return abstraction;
-}
-
-// get a list of the file names of that are attached to the source
-QStringList ResearchID::getAttachedFileNames() const
-{
-    QString queryString = "SELECT file_name FROM files WHERE research_id = :research_id;";
-    QSqlQuery query;
-    query.prepare(queryString);
-    query.bindValue(":research_id", id);
-    query.exec();
-    QStringList fileNames;
-    while(query.next())
-    {
-        fileNames.append(query.record().value(0).toString());
-    }
-    return fileNames;
-}
-
-// get the data of a file by file name
-QByteArray ResearchID::getFileData(const QString& fileName)
-{
-    QString queryString = "SELECT file_data FROM files WHERE research_id = :research_id AND file_name = :file_name;";
-    QSqlQuery query;
-    query.prepare(queryString);
-    query.bindValue(":research_id", id);
-    query.bindValue(":file_name", fileName);
-    query.exec();
-    QByteArray data;
-    while(query.next())
-    {
-        data = query.record().value(0).toByteArray();
-    }
-    return data;
 }

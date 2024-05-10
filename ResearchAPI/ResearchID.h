@@ -2,6 +2,10 @@
 #define RESEARCHID_H
 #include <QString>
 #include <QDate>
+#include <QSqlRecord>
+#include <QList>
+#include "FileID.h"
+
 class ResearchID
 {
     unsigned int id;
@@ -32,7 +36,7 @@ public:
 
     void insertKeyword(const QString keyword);
 
-    void attachFile(const QString& fileName, const QByteArray& data);
+    bool attachFile(const QString& fileName, const QByteArray& data);
 
     // get the title of the research reecord
     QString getTitle() const;
@@ -54,11 +58,7 @@ public:
     // get the keywords for this research source
     QStringList getKeywords() const;
 
-    // get a list of the file names of that are attached to the source
-    QStringList getAttachedFileNames() const;
-
-    // get the data of a file by file name
-    QByteArray getFileData(const QString& fileName);
+    QList<FileID> getFiles() const;
 };
 
 #endif // RESEARCHID_H

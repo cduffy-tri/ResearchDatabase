@@ -10,7 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     InsertResearchSourceForm.cpp \
-    ResearchID.cpp \
+    ResearchAPI/FileID.cpp \
+    ResearchAPI/ResearchID.cpp \
     filetools.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -19,7 +20,8 @@ SOURCES += \
 
 HEADERS += \
     InsertResearchSourceForm.h \
-    ResearchID.h \
+    ResearchAPI/FileID.h \
+    ResearchAPI/ResearchID.h \
     filetools.h \
     mainwindow.h \
     researchdb.h \
