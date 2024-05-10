@@ -19,7 +19,7 @@ ResearchID ResearchID::generateNewSource(const QString& sourceTitle)
     ResearchID researchItem;
 
     // generate record
-    QString queryString = "INSERT INTO research title VALUES(:title);";
+    QString queryString = "INSERT INTO research (title) VALUES(:title);";
     QSqlQuery query;
     query.prepare(queryString);
     query.bindValue(":title", sourceTitle);
@@ -115,46 +115,98 @@ void ResearchID::setURL(const QString& url)
     query.exec();
 }
 
-/*void ResearchID::insertKeyword(const QString keyword)
+void ResearchID::insertKeyword(const QString keyword)
 {
+    // if the research_id is not valid then don't insert the keyword
+    if(!this->isValid())
+        return;
+
     // generate the keyword_def record if not already created
     QString keywordStr = keyword.toLower(); // prevent upper case from being stored
-    QString queryString = "INSERT INTO keyword_def (keyword_def_str) VALUES(:keyword)";
+    QString queryString = "INSERT INTO keyword_def (keyword_def_str) VALUES(:keyword_def_str)";
     QSqlQuery query;
     query.prepare(queryString);
-    query.bindValue(":keyword", keywordStr);
+    query.bindValue(":keyword_def_str", keywordStr);
     query.exec();
 
     QVariant lastKeywordID = query.lastInsertId();
+
     if(lastKeywordID.isValid())
     {
+        // keyword fresh inserted
+
         // insert the new keyword_def_id into the keywords table with the research_id
-        QSqlQuery query;
-        query.prepare("INSERT INTO keywords (keyword_def_id, research_id) VALUES(:keyword_def_id, :research_id);");
-        query.bindValue(":keyword_def_id", lastKeywordID);
-        query.bindValue(":research_id", id);
-        query.exec();
+
+        // check if the keyword_def_id is already in the table with the current research_id
+        QSqlQuery checkQuery;
+        QString checkQueryString = "SELECT * FROM keywords WHERE keyword_def_id = :keyword_def_id AND "
+                                   "research_id = :research_id;";
+        checkQuery.prepare(checkQueryString);
+        checkQuery.bindValue(":keyword_def_id", lastKeywordID);
+        checkQuery.bindValue(":research_id:", id);
+        checkQuery.exec();
+        bool alreadyInserted = false;
+        while(checkQuery.next())
+        {
+            alreadyInserted = true;
+        }
+
+        if(!alreadyInserted)
+        {
+            QSqlQuery query;
+            query.prepare("INSERT INTO keywords (keyword_def_id, research_id) VALUES(:keyword_def_id, :research_id);");
+            query.bindValue(":keyword_def_id", lastKeywordID);
+            query.bindValue(":research_id", id);
+            query.exec();
+        }
     }
     else
     {
-        // create the new keyword_def record
-        QSqlQuery query;
+        // keyword already exists
+        /*QSqlQuery query;
         query.prepare("INSERT INTO keyword_def (keyword_def_str) :keyword_def_str;");
         query.bindValue(":keyword_def_str", keywordStr);
-        query.exec();
-
-        QVariant lastKeywordID = query.lastInsertId();
+        query.exec();*/
         // insert the keyword into the keywords table
-        if(lastKeywordID.isValid())
+
+        // get the existing keyword id
+        QSqlQuery existingKeywordQuery;
+        existingKeywordQuery.prepare("SELECT keyword_def_id FROM keyword_def WHERE keyword_def_str = :keyword_def_str;");
+        existingKeywordQuery.bindValue(":keyword_def_str", keywordStr);
+        existingKeywordQuery.exec();
+        QVariant existingKeywordDefID;
+        while(existingKeywordQuery.next())
+        {
+            existingKeywordDefID = existingKeywordQuery.record().value(0);
+        }
+
+        //qDebug() << existingKeywordDefID;
+
+        // check if the keyword is already inserted with the current research_id
+        QSqlQuery checkQuery;
+        QString checkQueryString = "SELECT * FROM keywords WHERE keyword_def_id = :keyword_def_id AND "
+                                   "research_id = :research_id;";
+        checkQuery.prepare(checkQueryString);
+        checkQuery.bindValue(":keyword_def_id", existingKeywordDefID);
+        checkQuery.bindValue(":research_id", id);
+        checkQuery.exec();
+        bool alreadyInserted = false;
+        while(checkQuery.next())
+        {
+            alreadyInserted = true;
+        }
+
+        if(!alreadyInserted)
         {
             QSqlQuery keywordsQuery;
             keywordsQuery.prepare("INSERT INTO keywords (keyword_def_id, research_id) VALUES(:keyword_def_id, :research_id);");
-            keywordsQuery.bindValue(":keyword_def_id", lastKeywordID);
+            keywordsQuery.bindValue(":keyword_def_id", existingKeywordDefID);
             keywordsQuery.bindValue(":research_id", id);
             keywordsQuery.exec();
+            qDebug() << keywordsQuery.lastInsertId();
         }
     }
-}*/
+}
 
 // get the title of the research reecord
 QString ResearchID::getTitle() const

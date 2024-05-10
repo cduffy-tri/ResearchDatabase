@@ -27,7 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect signals to slots
     connect(this->ui->searchButton, &QPushButton::clicked, this, &MainWindow::search);
-    //ResearchID(1).insertKeyword("Yeet");
+    //qDebug()<<ResearchID(1).getKeywords();
+    //ResearchID newSource = ResearchID::generateNewSource("Aliens");
+
+
+    //qDebug() << newSource.getTitle();
 }
 
 void MainWindow::search()

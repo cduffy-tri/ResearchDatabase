@@ -30,7 +30,7 @@ public:
 
     void setURL(const QString& url);
 
-    /*void insertKeyword(const QString keyword);*/
+    void insertKeyword(const QString keyword);
 
     // get the title of the research reecord
     QString getTitle() const;
