@@ -21,6 +21,9 @@ public:
     QString text() const;
 
     QList<unsigned int> getResearchIds();
+
+    // delete the keyword
+    void destroy();
 };
 
 #endif // KEYWORD_H

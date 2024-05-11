@@ -16,7 +16,7 @@ unsigned int Keyword::getKeywordIdByStr(const QString& keyword)
 {
     QSqlQuery query;
     query.prepare("SELECT keyword_def_id FROM keyword_def WHERE keyword_def_str = :keyword_def_str;");
-    query.bindValue(":keyword_def_str", keyword);
+    query.bindValue(":keyword_def_str", keyword.toLower());
     query.exec();
     unsigned int keyword_def_id = 0;
     while(query.next())
@@ -76,4 +76,19 @@ QList<unsigned int> Keyword::getResearchIds()
         researchIds.append(query.record().value(0).toUInt());
     }
     return researchIds;
+}
+
+void Keyword::destroy()
+{
+    // remove from keywords table
+    QSqlQuery keywordsQuery;
+    keywordsQuery.prepare("DELETE FROM keywords WHERE keyword_def_id = :keyword_def_id;");
+    keywordsQuery.bindValue(":keyword_def_id", id);
+    keywordsQuery.exec();
+
+    // remove from keyword_def table
+    QSqlQuery keywordDefQuery;
+    keywordDefQuery.prepare("DELETE FROM keyword_def WHERE keyword_def_id = :keyword_def_id;");
+    keywordDefQuery.bindValue(":keyword_def_id", id);
+    keywordDefQuery.exec();
 }

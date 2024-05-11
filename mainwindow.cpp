@@ -3,6 +3,7 @@
 #include "InsertResearchSourceForm.h"
 #include "ResearchAPI/FileID.h"
 #include "ResearchAPI/ResearchID.h"
+#include "ResearchAPI/Keyword.h"
 
 //#include "filetools.h"
 MainWindow::MainWindow(QWidget *parent)
@@ -29,12 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect signals to slots
     connect(this->ui->searchButton, &QPushButton::clicked, this, &MainWindow::search);
-    //ResearchID::generateNewSource("Aliens");
-    QList<FileID> fileList = ResearchID(1).getFiles();
-    for(const FileID& fileId : fileList)
-    {
-        qDebug () << fileId.getName();
-    }
+    Keyword(2).destroy();
 }
 
 void MainWindow::search()
