@@ -4,6 +4,8 @@
 #include "ResearchAPI/FileID.h"
 #include "ResearchAPI/ResearchID.h"
 #include "ResearchAPI/Keyword.h"
+#include <QListView>
+#include <QAbstractItemView>
 
 //#include "filetools.h"
 MainWindow::MainWindow(QWidget *parent)
@@ -21,20 +23,26 @@ MainWindow::MainWindow(QWidget *parent)
     font.setPointSize(15);
     this->setFont(font);
 
-    researchDB = new ResearchDB(this);
+    researchDB = new rsd::ResearchDB(this);
 
-    InsertResearchSourceForm* insertResearchSourceForm = new InsertResearchSourceForm(this);
-    this->setCentralWidget(insertResearchSourceForm);
+    //InsertResearchSourceForm* insertResearchSourceForm = new InsertResearchSourceForm(this);
+    //this->setCentralWidget(insertResearchSourceForm);
 
     this->showMaximized();
 
     // connect signals to slots
     connect(this->ui->searchButton, &QPushButton::clicked, this, &MainWindow::search);
-    Keyword(2).destroy();
+    connect(this->ui->listView, &QAbstractItemView::clicked, this, &MainWindow::researchRecordSelected);
+    //QSqlQueryModel* model = new QSqlQueryModel(this);
+    //rsd::Keyword(1).queryForResearch(model);
+
+    //qDebug() << model->record();
 }
 
 void MainWindow::search()
 {
+    if(this->ui->searchLineEdit->text().isEmpty())
+        return;
     if(this->ui->searchByComboBox->currentText() == "Title")
     {
         searchByTitle();
@@ -50,19 +58,23 @@ void MainWindow::searchByTitle()
     // capture what is entered into the search bar
     QString title = this->ui->searchLineEdit->text();
 
-    // make a query for the title
-    this->researchDB->searchByTitle(title);
+    this->researchDB->searchResearchByTitle(title);
 
-    this->ui->listView->setModel(this->researchDB->getQueryModel());
+    this->ui->listView->setModel(this->researchDB->getSearchModel());
 }
 
 void MainWindow::searchByKeyword()
 {
     QString keyword = this->ui->searchLineEdit->text();
     this->researchDB->searchByKeyword(keyword);
-    this->ui->listView->setModel(this->researchDB->getQueryModel());
+    this->ui->listView->setModel(this->researchDB->getSearchModel());
 }
 
+void MainWindow::researchRecordSelected()
+{
+    rsd::ResearchID source(this->researchDB->getSearchModel()->record(this->ui->listView->currentIndex().row()).value(1).toUInt());
+    qDebug() << source.getKeywords();
+}
 MainWindow::~MainWindow()
 {
     delete ui;

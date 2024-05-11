@@ -5,27 +5,29 @@
 #include <QSqlDatabase>
 #include <QSqlQueryModel>
 
-class ResearchDB : public QWidget
-{
-    Q_OBJECT
-public:
-    explicit ResearchDB(QWidget *parent = nullptr);
+namespace rsd {
+    class ResearchDB : public QWidget
+    {
+        Q_OBJECT
+    public:
+        explicit ResearchDB(QWidget *parent = nullptr);
 
-    QSqlDatabase getDB();
+        QSqlDatabase getDB();
 
-    QVariant getKeywordDefId(const QString& keyword);
+        QVariant getKeywordDefId(const QString& keyword);
 
-    QSqlQueryModel* getQueryModel();
+        QSqlQueryModel* getSearchModel();
 
-    void searchByTitle(const QString& title);
+        void searchByKeyword(const QString& keyword);
 
-    void searchByKeyword(const QString& keyword);
-signals:
+        void searchResearchByTitle(QString title);
+    signals:
 
-private:
-    QSqlDatabase db;
+    private:
+        QSqlDatabase db;
 
-    QSqlQueryModel* queryModel = nullptr;
-};
+        QSqlQueryModel* searchModel = nullptr;
+    };
+}
 
 #endif // RESEARCHDB_H

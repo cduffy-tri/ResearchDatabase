@@ -2,28 +2,31 @@
 #define KEYWORD_H
 #include <QString>
 #include <QList>
+#include <QSqlQueryModel>
 
-class Keyword
-{
-    unsigned int id = 0;
-public:
-    Keyword();
-    Keyword(const unsigned int& id);
+namespace rsd {
+    class Keyword
+    {
+        unsigned int id = 0;
+    public:
+        Keyword();
+        Keyword(const unsigned int& id);
 
-    static unsigned int getKeywordIdByStr(const QString& keyword);
+        static unsigned int getKeywordIdByStr(const QString& keyword);
 
-    unsigned int getId() const;
+        unsigned int getId() const;
 
-    void setId(const unsigned int& id);
+        void setId(const unsigned int& id);
 
-    bool isValid() const;
+        bool isValid() const;
 
-    QString text() const;
+        QString text() const;
 
-    QList<unsigned int> getResearchIds();
+        QList<unsigned int> getResearchIds();
 
-    // delete the keyword
-    void destroy();
-};
+        // delete the keyword
+        void destroy();
+    };
+}
 
 #endif // KEYWORD_H

@@ -26,8 +26,10 @@ public slots:
 
     void searchByKeyword();
 
+    void researchRecordSelected();
+
 private:
     Ui::MainWindow *ui;
-    ResearchDB* researchDB = nullptr;
+    rsd::ResearchDB* researchDB = nullptr;
 };
 #endif // MAINWINDOW_H

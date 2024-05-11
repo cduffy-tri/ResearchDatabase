@@ -5,6 +5,7 @@
 #include <QSqlRecord>
 #include <QSqlField>
 #include "filetools.h"
+using namespace rsd;
 
 ResearchDB::ResearchDB(QWidget *parent)
     : QWidget{parent}
@@ -35,7 +36,7 @@ ResearchDB::ResearchDB(QWidget *parent)
     QSqlQuery(FileTools::readFile(":/sql/createKeywordsTable.sql"));
 
 
-    queryModel = new QSqlQueryModel(this);
+    searchModel = new QSqlQueryModel(this);
 }
 
 QSqlDatabase ResearchDB::getDB()
@@ -66,21 +67,24 @@ QVariant ResearchDB::getKeywordDefId(const QString& keyword)
     return keyword_def_id;
 }
 
-QSqlQueryModel* ResearchDB::getQueryModel()
+QSqlQueryModel* ResearchDB::getSearchModel()
 {
-    return queryModel;
-}
-
-void ResearchDB::searchByTitle(const QString& title)
-{
-    // set the query to the database using the qSqlQueryModel
-    QString queryText = QString(FileTools::readFile(":/sql/search/searchByTitle.sql"));
-    queryModel->setQuery(queryText.arg(title));
+    return searchModel;
 }
 
 void ResearchDB::searchByKeyword(const QString& keyword)
 {
     // use the keyword to make a sqlquery on the query model
     QString queryText = QString(FileTools::readFile(":/sql/search/searchByKeyword.sql")).arg(keyword);
-    this->queryModel->setQuery(queryText);
+    this->searchModel->setQuery(queryText);
+}
+
+void ResearchDB::searchResearchByTitle(QString title)
+{
+    QString queryText = "SELECT title, research_id FROM research "
+                        "WHERE title LIKE '%%1%'";
+    queryText = queryText.arg(title);
+    searchModel->setHeaderData(0, Qt::Horizontal, tr("Title"));
+    searchModel->setQuery(queryText);
+
 }

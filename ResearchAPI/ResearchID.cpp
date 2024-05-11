@@ -2,6 +2,7 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QVariant>
+using namespace rsd;
 
 ResearchID::ResearchID()
 {

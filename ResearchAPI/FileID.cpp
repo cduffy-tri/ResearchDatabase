@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 
+using namespace rsd;
+
 FileID::FileID() {}
 
 FileID::FileID(const unsigned int& id)

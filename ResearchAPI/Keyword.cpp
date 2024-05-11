@@ -1,6 +1,7 @@
 #include "ResearchAPI/Keyword.h"
 #include <QSqlQuery>
 #include <QSqlRecord>
+using namespace rsd;
 
 Keyword::Keyword()
 {
@@ -25,6 +26,7 @@ unsigned int Keyword::getKeywordIdByStr(const QString& keyword)
     }
     return keyword_def_id;
 }
+
 
 unsigned int Keyword::getId() const
 {
