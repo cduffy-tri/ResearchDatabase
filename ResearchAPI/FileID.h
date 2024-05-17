@@ -21,6 +21,8 @@ namespace rsd {
         QByteArray getData() const;
 
         unsigned int getResearchID() const;
+
+        void destroy();
     };
 }
 

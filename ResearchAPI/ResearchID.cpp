@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QSqlRecord>
 #include <QVariant>
+#include <QSqlError>
+#include "Keyword.h"
 using namespace rsd;
 
 ResearchID::ResearchID()
@@ -320,6 +322,27 @@ QStringList ResearchID::getKeywords() const
     return keywords;
 }
 
+QList<unsigned int> ResearchID::getKeywordIds() const
+{
+    QString queryString = "SELECT keyword_def.keyword_def_id FROM keyword_def "
+                          "INNER JOIN keywords ON keywords.keyword_def_id = keyword_def.keyword_def_id "
+                          "WHERE keywords.research_id = :research_id;";
+    QSqlQuery query;
+    query.prepare(queryString);
+    query.bindValue(":research_id", id);
+    query.exec();
+    QList<unsigned int> keywordIds;
+    while(query.next())
+    {
+        keywordIds.append(query.record().value(0).toUInt());
+    }
+
+    QSqlError error = query.lastError();
+    qDebug() << error.text();
+
+    return keywordIds;
+}
+
 QList<FileID> ResearchID::getFiles() const
 {
     // find all of the files that are acociated with this research source
@@ -349,4 +372,66 @@ QString ResearchID::getAbstraction() const
         abstraction = query.record().value(0).toString();
     }
     return abstraction;
+}
+
+void ResearchID::destroy()
+{
+    // get the keywords associated with the research and delete them
+    QList<unsigned int> keywordIds = getKeywordIds();
+
+    for(const unsigned int& keywordId : keywordIds)
+    {
+        // check if keyword is only tied to this research if so delete it
+        Keyword keyword(keywordId);
+        qDebug() << keyword.getId();
+        if(keyword.getResearchIds().size() > 1)
+        {
+            // only remove from keywords table
+            QSqlQuery query;
+            QString queryString = "DELETE FROM keywords WHERE keyword_def_id = :keyword_def_id AND "
+                                  "research_id = :research_id";
+            query.prepare(queryString);
+            query.bindValue(":keyword_def_id", keyword.getId());
+            query.bindValue(":research_id", id);
+            query.exec();
+        }
+        else
+        {
+            // remove from both keywords and keyword_def
+
+            // delete from keywords
+            {
+                QSqlQuery query;
+                QString queryString = "DELETE FROM keywords WHERE keyword_def_id = :keyword_def_id AND "
+                                      "research_id = :research_id";
+                query.prepare(queryString);
+                query.bindValue(":keyword_def_id", keyword.getId());
+                query.bindValue(":research_id", id);
+                query.exec();
+            }
+
+            // delete from keyword_def
+            {
+                QSqlQuery query;
+                QString queryString = "DELETE FROM keyword_def WHERE keyword_def_id = :keyword_def_id;";
+                query.prepare(queryString);
+                query.bindValue(":keyword_def_id", QVariant(keyword.getId()));
+                query.exec();
+            }
+        }
+    }
+
+    // delete any attached files
+    QList<FileID> files =  getFiles();
+    for(FileID& fileID : files)
+    {
+        fileID.destroy();
+    }
+
+    // delete research table record
+    QSqlQuery delResearchQuery;
+    QString queryString = "DELETE FROM research WHERE research_id = :research_id;";
+    delResearchQuery.prepare(queryString);
+    delResearchQuery.bindValue(":research_id", id);
+    delResearchQuery.exec();
 }

@@ -59,7 +59,11 @@ namespace rsd {
         // get the keywords for this research source
         QStringList getKeywords() const;
 
+        QList<unsigned int> getKeywordIds() const;
+
         QList<FileID> getFiles() const;
+
+        void destroy();
     };
 }
 

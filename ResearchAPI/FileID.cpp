@@ -77,3 +77,13 @@ unsigned int FileID::getResearchID() const
     }
     return researchId;
 }
+
+void FileID::destroy()
+{
+    // delete the file that has the current file id
+    QSqlQuery query;
+    QString queryString = "DELETE FROM files WHERE file_id = :file_id;";
+    query.prepare(queryString);
+    query.bindValue(":file_id", id);
+    query.exec();
+}

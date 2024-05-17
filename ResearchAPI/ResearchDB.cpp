@@ -86,5 +86,4 @@ void ResearchDB::searchResearchByTitle(QString title)
     queryText = queryText.arg(title);
     searchModel->setHeaderData(0, Qt::Horizontal, tr("Title"));
     searchModel->setQuery(queryText);
-
 }

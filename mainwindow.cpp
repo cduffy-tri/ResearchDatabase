@@ -6,6 +6,8 @@
 #include "ResearchAPI/Keyword.h"
 #include <QListView>
 #include <QAbstractItemView>
+#include "filetools.h"
+#include <QList>
 
 //#include "filetools.h"
 MainWindow::MainWindow(QWidget *parent)
@@ -37,6 +39,22 @@ MainWindow::MainWindow(QWidget *parent)
     //rsd::Keyword(1).queryForResearch(model);
 
     //qDebug() << model->record();
+    //rsd::ResearchID source = rsd::ResearchID::generateNewSource("Games");
+
+    //rsd::ResearchID(4).destroy();
+    //rsd::ResearchID(7).insertKeyword("Yeet");
+    //rsd::ResearchID(4).attachFile("Test.txt", QByteArray());
+
+    //rsd::ResearchID(7).destroy();
+
+    //for(rsd::FileID fileId : rsd::ResearchID(4).getFiles())
+    //{
+        //qDebug() << fileId.getName();
+    //}
+
+
+
+    //*qDebug() << */rsd::ResearchID(1).attachFile("Test.sql", FileTools::readData(":/sql/createFilesTable.sql"));
 }
 
 void MainWindow::search()
