@@ -26,6 +26,10 @@ public slots:
 
     QPushButton* getCancelButton();
 
+    QPushButton* getSubmitButton();
+
+    QString submitSource();
+
 private:
     Ui::InsertResearchSourceForm *ui;
 

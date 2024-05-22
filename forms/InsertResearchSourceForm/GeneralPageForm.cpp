@@ -12,3 +12,8 @@ GeneralPageForm::~GeneralPageForm()
 {
     delete ui;
 }
+
+QString GeneralPageForm::getTitle()
+{
+    return this->ui->titleLineEdit->text();
+}

@@ -1,6 +1,9 @@
 #include "InsertResearchSourceForm.h"
 #include "ui_InsertResearchSourceForm.h"
 #include <QListWidget>
+#include "ResearchAPI/ResearchID.h"
+
+#include "mainwindow.h"
 
 InsertResearchSourceForm::InsertResearchSourceForm(QWidget *parent)
     : QWidget(parent)
@@ -13,6 +16,7 @@ InsertResearchSourceForm::InsertResearchSourceForm(QWidget *parent)
 
     // connect signals to slots
     connect(this->ui->listWidget, &QListWidget::itemClicked, this, &InsertResearchSourceForm::switchOptionMenu);
+    //connect(this->ui->submitSourceButton, &QPushButton::clicked, this->parent(), &MainWindow::submitSource);
 
     // set the general page as the first displaying page when this widget is first loaded.
     this->ui->listWidget->setCurrentItem(this->ui->listWidget->item(0));
@@ -38,10 +42,33 @@ void InsertResearchSourceForm::switchOptionMenu(QListWidgetItem* item)
 
 bool InsertResearchSourceForm::isValid()
 {
+    if(this->generalPageForm->getTitle().isEmpty())
+        return false;
     return true;
+}
+
+QString InsertResearchSourceForm::submitSource()
+{
+    QString error = "";
+
+    if(this->generalPageForm->getTitle().isEmpty())
+        error = "You must give the source a title";
+
+    if(error.isEmpty())
+    {
+        // submit source
+        rsd::ResearchID source = rsd::ResearchID::generateNewSource(this->generalPageForm->getTitle());
+    }
+    return error;
 }
 
 QPushButton* InsertResearchSourceForm::getCancelButton()
 {
+
     return this->ui->cancelButton;
+}
+
+QPushButton* InsertResearchSourceForm::getSubmitButton()
+{
+    return this->ui->submitSourceButton;
 }

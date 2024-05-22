@@ -33,6 +33,8 @@ public slots:
 
     void removeInsertResearchSourceForm();
 
+    void submitSource();
+
 private:
     Ui::MainWindow *ui;
     rsd::ResearchDB* researchDB = nullptr;

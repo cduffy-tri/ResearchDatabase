@@ -9,6 +9,7 @@
 #include "filetools.h"
 #include <QPushButton>
 #include <QList>
+#include <QMessageBox>
 
 //#include "filetools.h"
 MainWindow::MainWindow(QWidget *parent)
@@ -84,6 +85,7 @@ void MainWindow::loadInsertResearchSourceForm()
         insertForm = new InsertResearchSourceForm();
         QPushButton* button = insertForm->getCancelButton();
         connect(button, &QPushButton::clicked, this, &MainWindow::removeInsertResearchSourceForm);
+        connect(insertForm->getSubmitButton(), &QPushButton::clicked, this, &MainWindow::submitSource);
 
         // attach this widget to a full screen view on the screen
         //this->ui->mainStackedWidget->insertWidget(0, insertForm);
@@ -94,12 +96,22 @@ void MainWindow::loadInsertResearchSourceForm()
 void MainWindow::removeInsertResearchSourceForm()
 {
     //delete and detach this menu from view if the insertSourceForm Validates Correctly
-    if(insertForm->isValid())
+    this->ui->mainStackedWidget->setCurrentIndex(0);
+    this->ui->mainStackedWidget->removeWidget(insertForm);
+    delete insertForm;
+    insertForm = nullptr;
+}
+
+void MainWindow::submitSource()
+{
+    QString error = this->insertForm->submitSource();
+    if(error.isEmpty())
     {
-        this->ui->mainStackedWidget->setCurrentIndex(0);
-        this->ui->mainStackedWidget->removeWidget(insertForm);
-        delete insertForm;
-        insertForm = nullptr;
+        removeInsertResearchSourceForm();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Input Error", error);
     }
 }
 

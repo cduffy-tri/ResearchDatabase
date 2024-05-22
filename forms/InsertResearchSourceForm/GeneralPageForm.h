@@ -15,8 +15,12 @@ public:
     explicit GeneralPageForm(QWidget *parent = nullptr);
     ~GeneralPageForm();
 
+    QString getTitle();
+
 private:
     Ui::GeneralPageForm *ui;
+
+
 };
 
 #endif // GENERALPAGEFORM_H
