@@ -17,7 +17,7 @@
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QStackedWidget" name="mainStackedWidget">
-      <widget class="QWidget" name="page">
+      <widget class="QWidget" name="searchPage">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
          <layout class="QHBoxLayout" name="searchBarHorizontalLayout">
@@ -48,6 +48,7 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="insertSourcePage"/>
      </widget>
     </item>
    </layout>
@@ -58,11 +59,23 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>33</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionInsert_New_Source"/>
+   </widget>
+   <addaction name="menuFile"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionInsert_New_Source">
+   <property name="text">
+    <string>Insert New Source</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

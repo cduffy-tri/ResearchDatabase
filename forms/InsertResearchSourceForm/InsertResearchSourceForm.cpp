@@ -30,5 +30,18 @@ void InsertResearchSourceForm::switchOptionMenu(QListWidgetItem* item)
     {
         // switch to the General Widget
         qDebug() << "Switching to General page";
+
+        // move stack widget to general page widget
+        this->ui->mainStackedWidget->setCurrentIndex(this->ui->mainStackedWidget->addWidget(this->generalPageForm));
     }
+}
+
+bool InsertResearchSourceForm::isValid()
+{
+    return true;
+}
+
+QPushButton* InsertResearchSourceForm::getCancelButton()
+{
+    return this->ui->cancelButton;
 }

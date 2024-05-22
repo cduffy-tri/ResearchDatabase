@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "ResearchAPI/ResearchDB.h"
+#include "forms/InsertResearchSourceForm/InsertResearchSourceForm.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -28,8 +29,14 @@ public slots:
 
     void researchRecordSelected();
 
+    void loadInsertResearchSourceForm();
+
+    void removeInsertResearchSourceForm();
+
 private:
     Ui::MainWindow *ui;
     rsd::ResearchDB* researchDB = nullptr;
+
+    InsertResearchSourceForm* insertForm = nullptr;
 };
 #endif // MAINWINDOW_H
