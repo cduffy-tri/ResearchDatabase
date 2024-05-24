@@ -35,6 +35,8 @@ public slots:
 
     void submitSource();
 
+    void viewSelectedSource();
+
 private:
     Ui::MainWindow *ui;
     rsd::ResearchDB* researchDB = nullptr;

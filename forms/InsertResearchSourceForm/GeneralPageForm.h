@@ -17,6 +17,12 @@ public:
 
     QString getTitle();
 
+    QString getAuthor();
+
+    QDate getPublicationDate();
+
+    QString getAbstraction();
+
 private:
     Ui::GeneralPageForm *ui;
 

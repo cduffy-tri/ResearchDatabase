@@ -58,6 +58,9 @@ QString InsertResearchSourceForm::submitSource()
     {
         // submit source
         rsd::ResearchID source = rsd::ResearchID::generateNewSource(this->generalPageForm->getTitle());
+        source.setAuthor(this->generalPageForm->getAuthor());
+        source.setPublicationDate(this->generalPageForm->getPublicationDate());
+        source.setAbstraction(this->generalPageForm->getAbstraction());
     }
     return error;
 }

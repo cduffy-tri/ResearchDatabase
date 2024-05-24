@@ -34,7 +34,7 @@
          <property name="title">
           <string>General</string>
          </property>
-         <widget class="QWidget" name="">
+         <widget class="QWidget" name="layoutWidget">
           <property name="geometry">
            <rect>
             <x>60</x>
@@ -53,6 +53,68 @@
            </item>
            <item>
             <widget class="QLineEdit" name="titleLineEdit"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QGroupBox" name="abstractionGroupBox">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>200</y>
+            <width>211</width>
+            <height>171</height>
+           </rect>
+          </property>
+          <property name="title">
+           <string>Abstraction</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QTextEdit" name="abstractionTextEdit"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>100</y>
+            <width>301</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <layout class="QHBoxLayout" name="authorHorizontalLayout">
+           <item>
+            <widget class="QLabel" name="authorLabel">
+             <property name="text">
+              <string>Author: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLineEdit" name="authorLineEdit"/>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="">
+          <property name="geometry">
+           <rect>
+            <x>60</x>
+            <y>140</y>
+            <width>186</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <layout class="QHBoxLayout" name="publicationDateHorizontalLayout">
+           <item>
+            <widget class="QLabel" name="publicationDateLabel">
+             <property name="text">
+              <string>Publication Date: </string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QDateEdit" name="publicationDateEdit"/>
            </item>
           </layout>
          </widget>

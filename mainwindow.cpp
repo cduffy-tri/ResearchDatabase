@@ -115,6 +115,14 @@ void MainWindow::submitSource()
     }
 }
 
+void MainWindow::viewSelectedSource()
+{
+    // create a menu that will display the currently select source data information that
+    // is read only
+
+
+}
+
 MainWindow::~MainWindow()
 {
     delete ui;
