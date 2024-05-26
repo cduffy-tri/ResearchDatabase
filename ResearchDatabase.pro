@@ -16,6 +16,7 @@ SOURCES += \
     filetools.cpp \
     forms/InsertResearchSourceForm/GeneralPageForm.cpp \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.cpp \
+    forms/InsertResearchSourceForm/KeywordsPageForm.cpp \
     main.cpp \
     mainwindow.cpp \
     researchitem.cpp
@@ -28,12 +29,14 @@ HEADERS += \
     filetools.h \
     forms/InsertResearchSourceForm/GeneralPageForm.h \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.h \
+    forms/InsertResearchSourceForm/KeywordsPageForm.h \
     mainwindow.h \
     researchitem.h
 
 FORMS += \
     forms/InsertResearchSourceForm/GeneralPageForm.ui \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.ui \
+    forms/InsertResearchSourceForm/KeywordsPageForm.ui \
     mainwindow.ui
 
 # Default rules for deployment.

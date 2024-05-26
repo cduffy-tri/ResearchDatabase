@@ -32,3 +32,13 @@ QString GeneralPageForm::getAbstraction()
 {
     return this->ui->abstractionTextEdit->toHtml();
 }
+
+QString GeneralPageForm::getDOI()
+{
+    return this->ui->doiLineEdit->text();
+}
+
+QString GeneralPageForm::getURL()
+{
+    return this->ui->urlLineEdit->text();
+}

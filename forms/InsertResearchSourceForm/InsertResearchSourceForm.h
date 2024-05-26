@@ -5,6 +5,7 @@
 #include <QListWidgetItem>
 #include <QPushButton>
 #include "GeneralPageForm.h"
+#include "KeywordsPageForm.h"
 
 namespace Ui {
 class InsertResearchSourceForm;
@@ -33,7 +34,9 @@ public slots:
 private:
     Ui::InsertResearchSourceForm *ui;
 
-    GeneralPageForm* generalPageForm = new GeneralPageForm(this);
+    GeneralPageForm* generalPageForm = new GeneralPageForm();
+
+    KeywordsPageForm* keywordsPageForm = new KeywordsPageForm();
 };
 
 #endif // INSERTRESEARCHSOURCEFORM_H

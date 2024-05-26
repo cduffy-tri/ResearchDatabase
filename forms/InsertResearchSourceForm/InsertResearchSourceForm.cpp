@@ -13,6 +13,7 @@ InsertResearchSourceForm::InsertResearchSourceForm(QWidget *parent)
 
     // setup all of the options items in the listWidget
     this->ui->listWidget->addItem("General");
+    this->ui->listWidget->addItem("Keywords");
 
     // connect signals to slots
     connect(this->ui->listWidget, &QListWidget::itemClicked, this, &InsertResearchSourceForm::switchOptionMenu);
@@ -25,6 +26,8 @@ InsertResearchSourceForm::InsertResearchSourceForm(QWidget *parent)
 
 InsertResearchSourceForm::~InsertResearchSourceForm()
 {
+    delete generalPageForm;
+    delete keywordsPageForm;
     delete ui;
 }
 
@@ -37,6 +40,10 @@ void InsertResearchSourceForm::switchOptionMenu(QListWidgetItem* item)
 
         // move stack widget to general page widget
         this->ui->mainStackedWidget->setCurrentIndex(this->ui->mainStackedWidget->addWidget(this->generalPageForm));
+    }
+    else if(item->text() == "Keywords")
+    {
+        this->ui->mainStackedWidget->setCurrentIndex(this->ui->mainStackedWidget->addWidget(this->keywordsPageForm));
     }
 }
 
@@ -61,6 +68,14 @@ QString InsertResearchSourceForm::submitSource()
         source.setAuthor(this->generalPageForm->getAuthor());
         source.setPublicationDate(this->generalPageForm->getPublicationDate());
         source.setAbstraction(this->generalPageForm->getAbstraction());
+        source.setDOI(this->generalPageForm->getDOI());
+        source.setURL(this->generalPageForm->getURL());
+
+        // insert keywords
+        for(const QString& keyword : this->keywordsPageForm->getKeywords())
+        {
+            source.insertKeyword(keyword);
+        }
     }
     return error;
 }

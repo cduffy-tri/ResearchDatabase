@@ -23,6 +23,10 @@ public:
 
     QString getAbstraction();
 
+    QString getDOI();
+
+    QString getURL();
+
 private:
     Ui::GeneralPageForm *ui;
 
