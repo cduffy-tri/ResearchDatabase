@@ -3,6 +3,9 @@
 #include <QMessageBox>
 #include <QListWidgetItem>
 #include <QPushButton>
+#include <QItemSelectionModel>
+#include <QModelIndexList>
+#include <QSqlRecord>
 
 KeywordsPageForm::KeywordsPageForm(QWidget *parent)
     : QWidget(parent)
@@ -12,6 +15,7 @@ KeywordsPageForm::KeywordsPageForm(QWidget *parent)
 
     connect(this->ui->insertKeywordButton, &QPushButton::clicked, this, &KeywordsPageForm::insertKeyword);
     connect(this->ui->removeKeywordButton, &QPushButton::clicked, this, &KeywordsPageForm::removeKeyword);
+    connect(this->ui->existingKeywordsButton, &QPushButton::clicked, this, &KeywordsPageForm::SelectExistingKeyword);
 }
 
 KeywordsPageForm::~KeywordsPageForm()
@@ -53,4 +57,21 @@ QList<QString> KeywordsPageForm::getKeywords()
         list.append(keyword);
     }
     return list;
+}
+
+void KeywordsPageForm::SelectExistingKeyword()
+{
+    qDebug() << "Create Dialog";
+
+    if(keywordSelectDialog->exec() == QDialog::Accepted)
+    {
+        // capture the selected keywords and insert them into the list
+
+        QItemSelectionModel* selectionModel = keywordSelectDialog->getSelectionModel();
+        QModelIndexList selectedRows = selectionModel->selectedRows();
+        for(const QModelIndex& index : selectedRows)
+        {
+            this->ui->listWidget->addItem(keywordSelectDialog->keywordModel->record(index.row()).value(0).toString());
+        }
+    }
 }

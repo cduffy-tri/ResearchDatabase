@@ -15,16 +15,27 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
      <item>
-      <widget class="QLabel" name="keywordLabel">
-       <property name="text">
-        <string>Keyword: </string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLabel" name="keywordLabel">
+         <property name="text">
+          <string>Keyword: </string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="keywordLineEdit"/>
+       </item>
+      </layout>
      </item>
      <item>
-      <widget class="QLineEdit" name="keywordLineEdit"/>
+      <widget class="QPushButton" name="existingKeywordsButton">
+       <property name="text">
+        <string>Existing Keywords</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>

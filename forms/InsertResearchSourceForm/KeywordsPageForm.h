@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QSet>
 #include <QList>
+#include "SelectKeywordsDialog.h"
 
 namespace Ui {
 class KeywordsPageForm;
@@ -22,10 +23,14 @@ public slots:
 
     void removeKeyword();
 
+    void SelectExistingKeyword();
+
     QList<QString> getKeywords();
 
 private:
     Ui::KeywordsPageForm *ui;
+
+    SelectKeywordsDialog* keywordSelectDialog = new SelectKeywordsDialog(this);
 
     QSet<QString> keywords;
 

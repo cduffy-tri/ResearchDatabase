@@ -17,6 +17,7 @@ SOURCES += \
     forms/InsertResearchSourceForm/GeneralPageForm.cpp \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.cpp \
     forms/InsertResearchSourceForm/KeywordsPageForm.cpp \
+    forms/InsertResearchSourceForm/SelectKeywordsDialog.cpp \
     main.cpp \
     mainwindow.cpp \
     researchitem.cpp
@@ -30,6 +31,7 @@ HEADERS += \
     forms/InsertResearchSourceForm/GeneralPageForm.h \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.h \
     forms/InsertResearchSourceForm/KeywordsPageForm.h \
+    forms/InsertResearchSourceForm/SelectKeywordsDialog.h \
     mainwindow.h \
     researchitem.h
 
@@ -37,6 +39,7 @@ FORMS += \
     forms/InsertResearchSourceForm/GeneralPageForm.ui \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.ui \
     forms/InsertResearchSourceForm/KeywordsPageForm.ui \
+    forms/InsertResearchSourceForm/SelectKeywordsDialog.ui \
     mainwindow.ui
 
 # Default rules for deployment.
