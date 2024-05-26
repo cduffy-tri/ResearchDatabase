@@ -7,8 +7,8 @@
 #include "filetools.h"
 using namespace rsd;
 
-ResearchDB::ResearchDB(QWidget *parent)
-    : QWidget{parent}
+ResearchDB::ResearchDB(QObject *parent)
+    : QObject{parent}
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("research.db");
@@ -16,11 +16,11 @@ ResearchDB::ResearchDB(QWidget *parent)
     QSqlError error = db.lastError();
     if(error.isValid())
     {
-        QMessageBox::warning(this, "DB Error", "Error: "+error.text());
+        //QMessageBox::warning(this, "DB Error", "Error: "+error.text());
     }
     else
     {
-        qDebug() << "Connnected to database";
+        //qDebug() << "Connnected to database";
     }
 
     // create the research table

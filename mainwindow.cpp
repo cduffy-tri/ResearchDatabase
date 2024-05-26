@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
     this->ui->searchByComboBox->insertItem(0, "Title");
     this->ui->searchByComboBox->insertItem(1, "Keyword");
 
-    QFont font = this->font();
-    font.setPointSize(15);
-    this->setFont(font);
+    //QFont font = this->font();
+    //font.setPointSize(15);
+    //this->setFont(font);
 
     researchDB = new rsd::ResearchDB(this);
 

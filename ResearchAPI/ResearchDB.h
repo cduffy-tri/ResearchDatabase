@@ -6,11 +6,11 @@
 #include <QSqlQueryModel>
 
 namespace rsd {
-    class ResearchDB : public QWidget
+    class ResearchDB : public QObject
     {
         Q_OBJECT
     public:
-        explicit ResearchDB(QWidget *parent = nullptr);
+        explicit ResearchDB(QObject *parent = nullptr);
 
         QSqlDatabase getDB();
 
