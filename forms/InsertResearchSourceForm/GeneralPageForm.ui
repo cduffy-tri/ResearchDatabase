@@ -31,6 +31,12 @@
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
         <widget class="QGroupBox" name="groupBox">
+         <property name="font">
+          <font>
+           <family>MS Sans Serif</family>
+           <pointsize>14</pointsize>
+          </font>
+         </property>
          <property name="title">
           <string>General</string>
          </property>
@@ -39,13 +45,26 @@
            <layout class="QHBoxLayout" name="titleHorizontalLayout">
             <item>
              <widget class="QLabel" name="titleLabel">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Title:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="titleLineEdit"/>
+             <widget class="QLineEdit" name="titleLineEdit">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -53,13 +72,26 @@
            <layout class="QHBoxLayout" name="authorHorizontalLayout">
             <item>
              <widget class="QLabel" name="authorLabel">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Author: </string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="authorLineEdit"/>
+             <widget class="QLineEdit" name="authorLineEdit">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -67,13 +99,26 @@
            <layout class="QHBoxLayout" name="publicationDateHorizontalLayout">
             <item>
              <widget class="QLabel" name="publicationDateLabel">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Publication Date: </string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QDateEdit" name="publicationDateEdit"/>
+             <widget class="QDateEdit" name="publicationDateEdit">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -81,13 +126,26 @@
            <layout class="QHBoxLayout" name="doiHorizontalLayout">
             <item>
              <widget class="QLabel" name="doiLabel">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>DOI: </string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="doiLineEdit"/>
+             <widget class="QLineEdit" name="doiLineEdit">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -95,26 +153,41 @@
            <layout class="QHBoxLayout" name="urlHorizontalLayout">
             <item>
              <widget class="QLabel" name="urlLabel">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>URL: </string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="urlLineEdit"/>
+             <widget class="QLineEdit" name="urlLineEdit">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
           <item>
            <widget class="QGroupBox" name="abstractionGroupBox">
+            <property name="font">
+             <font>
+              <family>Arial</family>
+              <pointsize>11</pointsize>
+             </font>
+            </property>
             <property name="title">
              <string>Abstraction</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout_3">
-             <item>
-              <widget class="QTextEdit" name="abstractionTextEdit"/>
-             </item>
-            </layout>
+            <layout class="QHBoxLayout" name="horizontalLayout_3"/>
            </widget>
           </item>
          </layout>

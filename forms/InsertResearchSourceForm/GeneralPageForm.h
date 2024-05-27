@@ -2,6 +2,7 @@
 #define GENERALPAGEFORM_H
 
 #include <QWidget>
+#include "../WordProcessorWidget.h"
 
 namespace Ui {
 class GeneralPageForm;
@@ -30,7 +31,7 @@ public:
 private:
     Ui::GeneralPageForm *ui;
 
-
+    WordProcessorWidget* wordProcessorWidget = new WordProcessorWidget();
 };
 
 #endif // GENERALPAGEFORM_H

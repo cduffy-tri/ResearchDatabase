@@ -23,6 +23,12 @@
          <layout class="QHBoxLayout" name="searchBarHorizontalLayout">
           <item>
            <widget class="QLabel" name="searchLabel">
+            <property name="font">
+             <font>
+              <family>MS Sans Serif</family>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Search:</string>
             </property>
@@ -33,13 +39,26 @@
           </item>
           <item>
            <widget class="QPushButton" name="searchButton">
+            <property name="font">
+             <font>
+              <family>MS Sans Serif</family>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
             <property name="text">
              <string>Search</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QComboBox" name="searchByComboBox"/>
+           <widget class="QComboBox" name="searchByComboBox">
+            <property name="font">
+             <font>
+              <family>MS Sans Serif</family>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+           </widget>
           </item>
          </layout>
         </item>
@@ -52,6 +71,12 @@
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
              <widget class="QPushButton" name="openRecordButton">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Open Record</string>
               </property>
@@ -59,6 +84,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="reviseRecordButton">
+              <property name="font">
+               <font>
+                <family>Arial</family>
+                <pointsize>11</pointsize>
+               </font>
+              </property>
               <property name="text">
                <string>Revise Record</string>
               </property>
@@ -94,8 +125,14 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>10</pointsize>
+    </font>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">

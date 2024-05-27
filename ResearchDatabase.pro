@@ -18,6 +18,7 @@ SOURCES += \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.cpp \
     forms/InsertResearchSourceForm/KeywordsPageForm.cpp \
     forms/InsertResearchSourceForm/SelectKeywordsDialog.cpp \
+    forms/WordProcessorWidget.cpp \
     main.cpp \
     mainwindow.cpp \
     researchitem.cpp
@@ -32,6 +33,7 @@ HEADERS += \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.h \
     forms/InsertResearchSourceForm/KeywordsPageForm.h \
     forms/InsertResearchSourceForm/SelectKeywordsDialog.h \
+    forms/WordProcessorWidget.h \
     mainwindow.h \
     researchitem.h
 
@@ -40,6 +42,7 @@ FORMS += \
     forms/InsertResearchSourceForm/InsertResearchSourceForm.ui \
     forms/InsertResearchSourceForm/KeywordsPageForm.ui \
     forms/InsertResearchSourceForm/SelectKeywordsDialog.ui \
+    forms/WordProcessorWidget.ui \
     mainwindow.ui
 
 # Default rules for deployment.
@@ -48,4 +51,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    icons.qrc \
     sql.qrc

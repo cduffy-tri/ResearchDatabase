@@ -1,15 +1,22 @@
 #include "GeneralPageForm.h"
 #include "ui_GeneralPageForm.h"
+#include <QHBoxLayout>
 
 GeneralPageForm::GeneralPageForm(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::GeneralPageForm)
 {
     ui->setupUi(this);
+
+    QHBoxLayout* layout = new QHBoxLayout(this->ui->abstractionGroupBox);
+    wordProcessorWidget->setParent(this->ui->abstractionGroupBox);
+
+    layout->addWidget(wordProcessorWidget);
 }
 
 GeneralPageForm::~GeneralPageForm()
 {
+    delete wordProcessorWidget;
     delete ui;
 }
 
@@ -30,7 +37,7 @@ QDate GeneralPageForm::getPublicationDate()
 
 QString GeneralPageForm::getAbstraction()
 {
-    return this->ui->abstractionTextEdit->toHtml();
+    return this->wordProcessorWidget->getTextEdit()->toHtml();
 }
 
 QString GeneralPageForm::getDOI()

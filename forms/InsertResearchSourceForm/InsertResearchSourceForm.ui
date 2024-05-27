@@ -19,7 +19,7 @@
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QListWidget" name="listWidget">
@@ -29,12 +29,24 @@
            <verstretch>0</verstretch>
           </sizepolicy>
          </property>
+         <property name="font">
+          <font>
+           <family>MS Sans Serif</family>
+           <pointsize>17</pointsize>
+          </font>
+         </property>
         </widget>
        </item>
        <item>
         <layout class="QHBoxLayout" name="buttonHorizontalLayout">
          <item>
           <widget class="QPushButton" name="cancelButton">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Cancel</string>
            </property>
@@ -42,6 +54,12 @@
          </item>
          <item>
           <widget class="QPushButton" name="submitSourceButton">
+           <property name="font">
+            <font>
+             <family>Arial</family>
+             <pointsize>10</pointsize>
+            </font>
+           </property>
            <property name="text">
             <string>Submit Source</string>
            </property>
