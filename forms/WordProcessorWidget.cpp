@@ -31,7 +31,7 @@ WordProcessorWidget::WordProcessorWidget(QWidget *parent)
     option.setTabStopDistance(40);
     this->ui->textEdit->document()->setDefaultTextOption(option);
 
-    //this->ui->textEdit->setWordWrapMode(QTextOption::WordWrap);
+    this->ui->textEdit->setAcceptRichText(true);
     this->ui->textEdit->setLineWrapMode(QTextEdit::FixedColumnWidth);
     this->ui->textEdit->setLineWrapColumnOrWidth(50);
 
