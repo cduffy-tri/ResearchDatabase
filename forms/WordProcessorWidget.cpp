@@ -5,6 +5,7 @@
 #include <QPushButton>
 #include <QSpinBox>
 #include <QAbstractSpinBox>
+#include <QTextOption>
 #include <QFontComboBox>
 
 WordProcessorWidget::WordProcessorWidget(QWidget *parent)
@@ -25,13 +26,22 @@ WordProcessorWidget::WordProcessorWidget(QWidget *parent)
 
     updateFont();
 
+    // setup font combo box
+    QTextOption option = this->ui->textEdit->document()->defaultTextOption();
+    option.setTabStopDistance(40);
+    this->ui->textEdit->document()->setDefaultTextOption(option);
+
+    //this->ui->textEdit->setWordWrapMode(QTextOption::WordWrap);
+    this->ui->textEdit->setLineWrapMode(QTextEdit::FixedColumnWidth);
+    this->ui->textEdit->setLineWrapColumnOrWidth(50);
 
     //connect signals to slots
     connect(this->ui->boldButton, &QPushButton::clicked, this, &WordProcessorWidget::toggleBold);
     connect(this->ui->italicButton, &QPushButton::clicked, this, &WordProcessorWidget::toggleItalic);
     connect(this->ui->underlineButton, &QPushButton::clicked, this, &WordProcessorWidget::toggleUnderline);
     connect(this->ui->pointSizeSpinBox, &QSpinBox::editingFinished, this, &WordProcessorWidget::updatePointSize);
-    connect(this->ui->fontComboBox, &QFontComboBox::currentFontChanged, this, &WordProcessorWidget::updateFont);
+    connect(this->ui->fontComboBox, &QFontComboBox::textActivated, this, &WordProcessorWidget::updateFont);
+    connect(this->ui->textEdit, &QTextEdit::cursorPositionChanged, this, &WordProcessorWidget::updateUiBoxes);
 }
 
 WordProcessorWidget::~WordProcessorWidget()
@@ -80,6 +90,17 @@ void WordProcessorWidget::updatePointSize()
     font.setPointSize(this->ui->pointSizeSpinBox->value());
 
     getTextEdit()->setCurrentFont(font);
+}
+
+void WordProcessorWidget::updateUiBoxes()
+{
+    QFont font = getTextEdit()->currentFont();
+
+    // update point size
+    this->ui->pointSizeSpinBox->setValue(font.pointSize());
+
+    // update font
+    this->ui->fontComboBox->setCurrentFont(font);
 }
 
 void WordProcessorWidget::updateFont()

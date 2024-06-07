@@ -20,8 +20,7 @@ SOURCES += \
     forms/InsertResearchSourceForm/SelectKeywordsDialog.cpp \
     forms/WordProcessorWidget.cpp \
     main.cpp \
-    mainwindow.cpp \
-    researchitem.cpp
+    mainwindow.cpp
 
 HEADERS += \
     ResearchAPI/FileID.h \
@@ -34,8 +33,7 @@ HEADERS += \
     forms/InsertResearchSourceForm/KeywordsPageForm.h \
     forms/InsertResearchSourceForm/SelectKeywordsDialog.h \
     forms/WordProcessorWidget.h \
-    mainwindow.h \
-    researchitem.h
+    mainwindow.h
 
 FORMS += \
     forms/InsertResearchSourceForm/GeneralPageForm.ui \

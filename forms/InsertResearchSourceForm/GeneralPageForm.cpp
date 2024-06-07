@@ -9,8 +9,6 @@ GeneralPageForm::GeneralPageForm(QWidget *parent)
     ui->setupUi(this);
 
     QHBoxLayout* layout = new QHBoxLayout(this->ui->abstractionGroupBox);
-    wordProcessorWidget->setParent(this->ui->abstractionGroupBox);
-
     layout->addWidget(wordProcessorWidget);
 }
 

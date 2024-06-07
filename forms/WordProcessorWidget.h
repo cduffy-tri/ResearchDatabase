@@ -27,6 +27,8 @@ public slots:
 
     void updatePointSize();
 
+    void updateUiBoxes();
+
     void updateFont();
 
 private:
