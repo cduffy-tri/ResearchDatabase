@@ -10,6 +10,7 @@
 #include <QPushButton>
 #include <QList>
 #include <QMessageBox>
+#include <QLineEdit>
 
 //#include "filetools.h"
 MainWindow::MainWindow(QWidget *parent)
@@ -36,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // connect signals to slots
     connect(this->ui->searchButton, &QPushButton::clicked, this, &MainWindow::search);
+    connect(this->ui->searchLineEdit, &QLineEdit::returnPressed, this, &MainWindow::search);
     connect(this->ui->listView, &QAbstractItemView::clicked, this, &MainWindow::researchRecordSelected);
     connect(this->ui->actionInsert_New_Source, &QAction::triggered, this, &MainWindow::loadInsertResearchSourceForm);
 }
