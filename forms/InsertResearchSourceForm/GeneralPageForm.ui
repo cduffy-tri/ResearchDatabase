@@ -57,7 +57,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="titleLineEdit">
+             <widget class="CustomLineEdit" name="titleLineEdit">
               <property name="font">
                <font>
                 <family>Arial</family>
@@ -198,6 +198,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>CustomLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header location="global">CustomLineEdit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
